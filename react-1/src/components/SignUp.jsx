@@ -1,22 +1,7 @@
 import React from 'react';
 import { Form, withFormik, useField } from 'formik';
 import * as yup from 'yup';
-import { TextField, Button, Container, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
-
-// Material UI TextField with access to Formik Field's props and methods 
-const MuiFormikTextField = ({ label, ...props }) => {
-    const [field, meta] = useField(props);
-    return (
-        <TextField 
-            {...field}
-            {...props}
-            label={label}
-            error={meta.error && meta.touched}
-            helperText={ (meta.error && meta.touched) && meta.error }
-        />         
-    )
-}
-
+import { TextField, Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
@@ -44,8 +29,22 @@ const useStyles = makeStyles({
     }
   });
 
+// Material UI TextField with access to Formik Field's props and methods 
+const MuiFormikTextField = ({ label, ...props }) => {
+    const [field, meta] = useField(props);
+    return (
+        <TextField 
+            {...field}
+            {...props}
+            label={label}
+            error={meta.error && meta.touched}
+            helperText={ (meta.error && meta.touched) && meta.error }
+        />         
+    )
+}
+
 const SignUpForm = (props) => {
-    const { values, isSubmitting } = props;
+    const { isSubmitting } = props;
     const classes = useStyles();
 
     return (
@@ -61,7 +60,6 @@ const SignUpForm = (props) => {
                     <MuiFormikTextField className={classes.field} name='password' id='password' type='password' label='Password' />
                     <MuiFormikTextField className={classes.field} name='password2' id='password2' type='password' label='Password Confirmation' />
                     <Button disabled={isSubmitting} type='submit'>Submit</Button>
-                    {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
                 </Form>
             </Paper>
         </Grid>
