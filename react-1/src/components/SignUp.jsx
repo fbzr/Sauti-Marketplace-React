@@ -84,11 +84,21 @@ const SignUp = withFormik({
     }),
     // Create yup validation schema
     validationSchema: yup.object().shape({
-        fname: yup.string().min(2, 'First name must have at least 2 characters').required('First name is required'),
-        lname: yup.string().min(2, 'First name must have at least 2 characters').required('First name is required'),
-        email: yup.string().email().required('Email is required'),
-        password: yup.string().min(8, 'Password must have at least 8 characters').required('Password required'),
-        password2: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match').required('Password confirmation required')
+        fname: yup.string()
+            .min(2, 'First name must have at least 2 characters')
+            .required('First name is required'),
+        lname: yup.string()
+            .min(2, 'First name must have at least 2 characters')
+            .required('First name is required'),
+        email: yup.string()
+            .email()
+            .required('Email is required'),
+        password: yup.string()
+            .min(8, 'Password must have at least 8 characters')
+            .required('Password required'),
+        password2: yup.string()
+            .oneOf([yup.ref('password'), null], 'Passwords must match')
+            .required('Password confirmation required')
     }),
     handleSubmit: (data, { resetForm, setSubmitting}) => {
         setSubmitting(true);

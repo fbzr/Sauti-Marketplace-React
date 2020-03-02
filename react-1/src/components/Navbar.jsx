@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-import { AppBar, Toolbar, IconButton, Typography, Paper, Tabs, Tab } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import { AppBar, Toolbar, Typography, Paper, Tabs, Tab } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
