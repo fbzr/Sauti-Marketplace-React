@@ -3,7 +3,7 @@ import { Form, withFormik, useField } from 'formik';
 import * as yup from 'yup';
 import { TextField, Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
         height: '100vh',
         width: '100%',
@@ -15,8 +15,8 @@ const useStyles = makeStyles({
         alignContent: 'center'
     },
     paper: {
-        width: '400px',
-        padding: '2%'
+        width: '100%',
+        padding: theme.spacing(2)
     },
     fieldsContainer: {
         display: 'flex',
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     field: {
         margin: '5px 0'
     }
-  });
+  }));
 
 // Material UI TextField with access to Formik Field's props and methods 
 const MuiFormikTextField = ({ label, ...props }) => {
@@ -49,6 +49,7 @@ const SignUpForm = (props) => {
 
     return (
         <Grid container className={classes.root} >
+            <Grid item lg={3} md={4} sm={6} xs={11} p={4}>
             <Paper elevation={3} spacing={2} className={classes.paper}>
                 <Typography variant="h3" component="h1">
                     Sign Up
@@ -62,6 +63,7 @@ const SignUpForm = (props) => {
                     <Button disabled={isSubmitting} type='submit'>Submit</Button>
                 </Form>
             </Paper>
+            </Grid>
         </Grid>
     )
 }
@@ -87,6 +89,7 @@ const SignUp = withFormik({
         setSubmitting(true);
         // Post request simulation
         setTimeout(() => {
+            console.log(data);
             resetForm();
             setSubmitting(false);
         }, 2000);
