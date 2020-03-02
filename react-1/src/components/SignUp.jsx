@@ -1,13 +1,13 @@
 import React from 'react';
 import { Form, withFormik, useField } from 'formik';
 import * as yup from 'yup';
-import { TextField, Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
+import { TextField, Button, Grid, makeStyles, Paper, Typography, colors } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        height: '100vh',
+        height: 'calc(100% - 112px)',
         width: '100%',
-        backgroundColor: '#eee',
+        backgroundColor: colors.grey[100],
         margin: 0,
         padding: 0,
         display: 'flex',
@@ -26,6 +26,11 @@ const useStyles = makeStyles(theme => ({
     },
     field: {
         margin: '5px 0'
+    },
+    '@global': {
+        'html, body, #root': {
+            height: '100%'
+        }
     }
   }));
 
@@ -60,7 +65,7 @@ const SignUpForm = (props) => {
                     <MuiFormikTextField className={classes.field} label='Email' name='email' id='email' type='email' />
                     <MuiFormikTextField className={classes.field} name='password' id='password' type='password' label='Password' />
                     <MuiFormikTextField className={classes.field} name='password2' id='password2' type='password' label='Password Confirmation' />
-                    <Button disabled={isSubmitting} type='submit'>Submit</Button>
+                    <Button disabled={isSubmitting} variant="contained" color="primary" type='submit'>Submit</Button>
                 </Form>
             </Paper>
             </Grid>
@@ -92,7 +97,7 @@ const SignUp = withFormik({
             console.log(data);
             resetForm();
             setSubmitting(false);
-        }, 2000);
+        }, 1000);
     }
 })(SignUpForm)
 
