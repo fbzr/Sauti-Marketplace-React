@@ -1,10 +1,12 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
+import SignUp from './components/SignUp';
 
 function App() {
   return (
-    <div>
-    App
-    </div>
+    <Route exact path='/signup'>
+      <SignUp />
+    </Route>
   );
 }
 
