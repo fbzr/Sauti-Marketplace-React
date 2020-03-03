@@ -3,7 +3,7 @@ import { Form, withFormik, useField } from 'formik';
 import * as yup from 'yup';
 import { TextField, Button, Grid, makeStyles, Paper, Typography, colors, InputAdornment, IconButton } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-// import axios from 'axios';
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -123,14 +123,28 @@ const SignUp = withFormik({
             .required('Password confirmation required')
     }),
     handleSubmit: (data, { resetForm, setSubmitting }) => {
-        setSubmitting(true);
-        // Post request simulation
-        setTimeout(() => {
-            // const { username, password } = data;
-            // const res = async () => await axios.post('http://africanmarketplace.ddns.net:5000/api/auth/register');
-            resetForm();
-            setSubmitting(false);
-        }, 1000);
+        const { username, password } = data;
+        // Register
+        axios.post('http://africanmarketplace.ddns.net:5000/api/auth/register', { username, password })
+            .then(res => {
+                setSubmitting(true);
+                console.log(res);
+                
+                // Log in 
+                axios.post('http://africanmarketplace.ddns.net:5000/api/auth/login', { username, password })
+                    .then(res => {
+                        const { token, user_id } = res.data;
+                        console.log(`Token: ${token}\nUser ID: ${user_id}`);
+
+                        //TODO redirect to homepage
+                    })
+                    .catch(err => console.log(err))
+            })
+            .catch(err => console.log(err))
+            .finally(() => {
+                resetForm();
+                setSubmitting(false);
+            })
     }
 })(SignUpForm)
 
