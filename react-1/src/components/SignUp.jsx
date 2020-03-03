@@ -1,7 +1,8 @@
 import React from 'react';
 import { Form, withFormik, useField } from 'formik';
 import * as yup from 'yup';
-import { TextField, Button, Grid, makeStyles, Paper, Typography, colors } from '@material-ui/core';
+import { TextField, Button, Grid, makeStyles, Paper, Typography, colors, InputAdornment, IconButton } from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -49,8 +50,23 @@ const MuiFormikTextField = ({ label, ...props }) => {
 }
 
 const SignUpForm = (props) => {
-    const { isSubmitting } = props;
+    const { isSubmitting, values, setValues } = props;
     const classes = useStyles();
+
+    const handleChange = prop => event => {
+        console.log(props);
+        console.log(prop);
+        // setValues({ ...values, [prop]: event.target.value });
+      };
+    
+      const handleClickShowPassword = () => {
+        console.log(props);
+        setValues({ ...values,  showPassword: !values.showPassword });
+      };
+    
+    const handleMouseDownPassword = event => {
+        event.preventDefault();
+    };
 
     return (
         <Grid container className={classes.root} >
@@ -63,8 +79,28 @@ const SignUpForm = (props) => {
                     <MuiFormikTextField className={classes.field} label='First Name' name='fname' id='fname' />
                     <MuiFormikTextField className={classes.field} label='Last Name' name='lname' id='lname' />
                     <MuiFormikTextField className={classes.field} label='Email' name='email' id='email' type='email' />
-                    <MuiFormikTextField className={classes.field} name='password' id='password' type='password' label='Password' />
-                    <MuiFormikTextField className={classes.field} name='password2' id='password2' type='password' label='Password Confirmation' />
+                    <MuiFormikTextField 
+                        className={classes.field}
+                        name='password'
+                        id='password'
+                        type={values.showPassword ? 'text' : 'password'}
+                        label='Password' 
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword} >
+                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment> )
+                        }}     
+                    />
+                    <MuiFormikTextField 
+                        className={classes.field}
+                        name='password2'
+                        id='password2'
+                        type={values.showPassword ? 'text' : 'password'}
+                        label='Password'   
+                    />
                     <Button disabled={isSubmitting} variant="contained" color="primary" type='submit'>Submit</Button>
                 </Form>
             </Paper>
@@ -80,7 +116,8 @@ const SignUp = withFormik({
         lname: '',
         email: '',
         password: '',
-        password2: ''
+        password2: '',
+        showPassword: false
     }),
     // Create yup validation schema
     validationSchema: yup.object().shape({
