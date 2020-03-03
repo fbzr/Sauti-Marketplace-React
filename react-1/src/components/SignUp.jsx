@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, withFormik, useField } from 'formik';
 import * as yup from 'yup';
 import { TextField, Button, Grid, makeStyles, Paper, Typography, colors, InputAdornment, IconButton } from '@material-ui/core';
-import { Visibility, VisibilityOff, ContactsOutlined } from '@material-ui/icons';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
     root: {
