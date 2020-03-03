@@ -17,7 +17,7 @@ function App() {
       <Route exact path='/signup'>
         <SignUp />
       </Route>
-      <Route exact path='/products'>
+      <Route path={['/products', '/products/:id']}>
         <ProductsList />
       </Route>
     </Fragment>
