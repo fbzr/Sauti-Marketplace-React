@@ -52,17 +52,11 @@ const MuiFormikTextField = ({ label, ...props }) => {
 const SignUpForm = (props) => {
     const { isSubmitting, values, setValues } = props;
     const classes = useStyles();
-
-    const handleChange = prop => event => {
-        console.log(props);
-        console.log(prop);
-        // setValues({ ...values, [prop]: event.target.value });
-      };
     
-      const handleClickShowPassword = () => {
+    const handleClickShowPassword = () => {
         console.log(props);
         setValues({ ...values,  showPassword: !values.showPassword });
-      };
+    };
     
     const handleMouseDownPassword = event => {
         event.preventDefault();
@@ -99,7 +93,7 @@ const SignUpForm = (props) => {
                         name='password2'
                         id='password2'
                         type={values.showPassword ? 'text' : 'password'}
-                        label='Password'   
+                        label='Password Confirmation'   
                     />
                     <Button disabled={isSubmitting} variant="contained" color="primary" type='submit'>Submit</Button>
                 </Form>
