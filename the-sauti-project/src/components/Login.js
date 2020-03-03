@@ -25,6 +25,18 @@ const styles = () => ({
   }
 });
 
+
+initialState= ({
+  credentials: {
+    username: '',
+    password: ''
+  }
+})
+
+const login = e => {
+
+}
+
 const Login = props => {
   const {
     classes,
@@ -109,7 +121,7 @@ const Form = withFormik({
   validationSchema: Yup.object().shape({
     email: Yup.string()
       .username("Enter your username")
-      .required("Username is required"),
+      .required("UserName is required"),
     password: Yup.string()
       .min(8, "Password must contain at least 8 characters")
       .required("Enter your password")
