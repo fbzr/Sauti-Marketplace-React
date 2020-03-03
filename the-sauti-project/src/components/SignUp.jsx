@@ -3,6 +3,7 @@ import { Form, withFormik, useField } from 'formik';
 import * as yup from 'yup';
 import { TextField, Button, Grid, makeStyles, Paper, Typography, colors, InputAdornment, IconButton } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
+// import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -12,11 +13,11 @@ const useStyles = makeStyles(theme => ({
         margin: 0,
         padding: 0,
         display: 'flex',
-        justifyContent: 'center',
-        alignContent: 'center'
+        justifyContent: 'center'
     },
     paper: {
         width: '100%',
+        marginTop: '50px',
         padding: theme.spacing(2)
     },
     fieldsContainer: {
@@ -70,9 +71,7 @@ const SignUpForm = (props) => {
                     Sign Up
                 </Typography>
                 <Form width={500} autoComplete='off' className={classes.fieldsContainer}>
-                    <MuiFormikTextField className={classes.field} label='First Name' name='fname' id='fname' />
-                    <MuiFormikTextField className={classes.field} label='Last Name' name='lname' id='lname' />
-                    <MuiFormikTextField className={classes.field} label='Email' name='email' id='email' type='email' />
+                    <MuiFormikTextField className={classes.field} type='text' label='Username' name='username' id='username' />
                     <MuiFormikTextField 
                         className={classes.field}
                         name='password'
@@ -106,24 +105,16 @@ const SignUpForm = (props) => {
 const SignUp = withFormik({
     // Initialize "formik states"
     mapPropsToValues: () => ({
-        fname: '',
-        lname: '',
-        email: '',
+        username: '',
         password: '',
         password2: '',
         showPassword: false
     }),
     // Create yup validation schema
     validationSchema: yup.object().shape({
-        fname: yup.string()
-            .min(2, 'First name must have at least 2 characters')
-            .required('First name is required'),
-        lname: yup.string()
-            .min(2, 'First name must have at least 2 characters')
-            .required('First name is required'),
-        email: yup.string()
-            .email()
-            .required('Email is required'),
+        username: yup.string()
+            .min(4, 'Username must have at least 4 characters')
+            .required('Username is required'),
         password: yup.string()
             .min(8, 'Password must have at least 8 characters')
             .required('Password required'),
@@ -135,8 +126,8 @@ const SignUp = withFormik({
         setSubmitting(true);
         // Post request simulation
         setTimeout(() => {
-            const { fname, lname, email, password } = data;
-            console.log(fname, lname, email, password);
+            // const { username, password } = data;
+            // const res = async () => await axios.post('http://africanmarketplace.ddns.net:5000/api/auth/register');
             resetForm();
             setSubmitting(false);
         }, 1000);

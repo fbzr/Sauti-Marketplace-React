@@ -9,14 +9,13 @@ function App() {
   return (
     <Fragment>
       <CssBaseline />
-     <NavBar />
-      <Route exact path='/login'>
+      <NavBar />
+      <Route exact path={['/','/login']}>
        <Login />
       </Route>
       <Route exact path='/signup'>
         <SignUp />
       </Route>
-     
     </Fragment>
   );
 }
