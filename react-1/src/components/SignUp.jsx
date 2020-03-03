@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, withFormik, useField } from 'formik';
 import * as yup from 'yup';
 import { TextField, Button, Grid, makeStyles, Paper, Typography, colors, InputAdornment, IconButton } from '@material-ui/core';
-import { Visibility, VisibilityOff } from '@material-ui/icons';
+import { Visibility, VisibilityOff, ContactsOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -131,11 +131,12 @@ const SignUp = withFormik({
             .oneOf([yup.ref('password'), null], 'Passwords must match')
             .required('Password confirmation required')
     }),
-    handleSubmit: (data, { resetForm, setSubmitting}) => {
+    handleSubmit: (data, { resetForm, setSubmitting }) => {
         setSubmitting(true);
         // Post request simulation
         setTimeout(() => {
-            console.log(data);
+            const { fname, lname, email, password } = data;
+            console.log(fname, lname, email, password);
             resetForm();
             setSubmitting(false);
         }, 1000);

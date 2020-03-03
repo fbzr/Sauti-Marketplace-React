@@ -14,13 +14,10 @@ const Navbar = () => {
                 </Toolbar>
             </AppBar>
 
-            <Paper>
-                <Tabs value={pathName} indicatorColor='primary' textColor='primary' centered>
-                    <Tab label="Home" component={Link} value="/" to='/' />
-                    <Tab label="Sign Up" component={Link} value="/signup" to='/signup' />
-                    <Tab label="Sign In" component={Link} value="/signin" to='/signin' />
-                </Tabs>
-            </Paper>
+            <Tabs value={pathName} indicatorColor='primary' textColor='primary' centered>
+                <Tab label="Sign Up" component={Link} value="/signup" to='/signup' />
+                <Tab label="Sign In" component={Link} value="/signin" to='/signin' />
+            </Tabs>
         </Fragment>
     )
 }
