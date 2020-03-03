@@ -26,16 +26,7 @@ const styles = () => ({
 });
 
 
-initialState= ({
-  credentials: {
-    username: '',
-    password: ''
-  }
-})
 
-const login = e => {
-
-}
 
 const Login = props => {
   const {
@@ -61,8 +52,8 @@ const Login = props => {
           <CardContent>
             <TextField
               id="username"
-              label="Email"
-              type="username"
+              label="username"
+              type="text"
               value={values.username}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -109,7 +100,7 @@ const Login = props => {
 
 const Form = withFormik({
   mapPropsToValues: ({
-    email,
+    username,
     password
   }) => {
     return {
@@ -119,8 +110,8 @@ const Form = withFormik({
   },
 
   validationSchema: Yup.object().shape({
-    email: Yup.string()
-      .username("Enter your username")
+    username: Yup.string()
+      .email("Enter your username")
       .required("UserName is required"),
     password: Yup.string()
       .min(8, "Password must contain at least 8 characters")
