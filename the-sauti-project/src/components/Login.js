@@ -8,6 +8,7 @@ import CardActions from "@material-ui/core/CardActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
+import "./login.css";
 
 
 const styles = () => ({
@@ -43,7 +44,7 @@ const Login = props => {
       <form onSubmit={handleSubmit}>
       
         <Card className={classes.card}>
-      <h1>Sauti</h1>
+      <h1>Login</h1>
 
           <CardContent>
             <TextField
