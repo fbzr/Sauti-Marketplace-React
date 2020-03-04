@@ -27,7 +27,6 @@ const Navbar = () => {
                 <Tabs value={pathName} indicatorColor='primary' textColor='primary' centered>
                     <Tab label="Prices" component={Link} value="/prices" to='/prices' />
                     <Tab label="All listings" component={Link} value="/listings" to='/listings' />
-                    <Tab label="User Listings" component={Link} value="/users" to="/users" />
                 </Tabs>
             }
         </Fragment>

@@ -5,8 +5,8 @@ import { CssBaseline } from '@material-ui/core';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
 import Listings from './components/Listings';
-import User from './components/User';
 import PriceList from './components/PriceList';
+import PriceListMaterialTable from './components/PriceListMaterialTable';
 
 function App() {
   const [user, setUser] = useState();
@@ -24,11 +24,9 @@ function App() {
       <Route exact path='/listings'>
         <Listings />
       </Route>
-      <Route exact path='/users'>
-        <User />
-      </Route>
       <Route exact path='/prices'>
-        <PriceList />
+        {/* <PriceList /> */}
+        <PriceListMaterialTable />
       </Route>
     </Fragment>
   );

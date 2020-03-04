@@ -33,7 +33,7 @@ const PriceList = () => {
     const classes = useStyles();
 
     // TODO change to dinamic token
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpZCI6OSwiaWF0IjoxNTgzMjYxMjM4LCJleHAiOjE1ODMzNDc2Mzh9.3teldLkKlu-DW4fM4u5-lTQ_2WVtg4QbXMoA4PKmZcQ';
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpZCI6OSwiaWF0IjoxNTgzMzQ5MjAyLCJleHAiOjE1ODM0MzU2MDJ9.AIa9vshllTsHHXFmJ8E_yp65tsQ3fCcUtbG9BroPGnM';
     const [prices, setPrices] = useState([]);
 
     useEffect(() => {
@@ -57,14 +57,14 @@ const PriceList = () => {
                         <TableRow>
                             { headCells.map(headCell => (
                                 <TableCell className={classes.header} key={headCell.id}>
-                                    <Typography variant='h6' component='subtitle1'>{headCell.label}</Typography>
+                                    <Typography variant='h6'>{headCell.label}</Typography>
                                 </TableCell>
                             )) }
                         </TableRow>
                     </TableHead>
                     <TableBody>
                     { prices.map(item => (
-                        <TableRow>
+                        <TableRow key={item.id}>
                             <TableCell>{item.product}</TableCell>
                             <TableCell>{item.product_cat}</TableCell>
                             <TableCell>{item.sub_category}</TableCell>
