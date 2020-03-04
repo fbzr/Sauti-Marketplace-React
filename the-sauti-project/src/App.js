@@ -6,7 +6,6 @@ import Login from './components/Login';
 import NavBar from './components/NavBar';
 import Listings from './components/Listings';
 import PriceList from './components/PriceList';
-import PriceListMaterialTable from './components/PriceListMaterialTable';
 
 function App() {
   const [user, setUser] = useState();
@@ -25,8 +24,7 @@ function App() {
         <Listings />
       </Route>
       <Route exact path='/prices'>
-        {/* <PriceList /> */}
-        <PriceListMaterialTable />
+        <PriceList />
       </Route>
     </Fragment>
   );
