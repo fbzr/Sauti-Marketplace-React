@@ -21,7 +21,7 @@ const Listings = props => {
     
     return (
         <Container>
-            <Grid justify='center' container>
+            <Grid justify='flex-start' container>
                 { listings.map(item => (
                     <ListingItem key={item.id} listing={item} />
                 )) }

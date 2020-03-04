@@ -3,7 +3,8 @@ import { Card, CardContent, Typography, makeStyles, Grid } from '@material-ui/co
 
 const useStyles = makeStyles(theme => ({
     root: {
-        margin: theme.spacing(2)
+        margin: theme.spacing(2),
+        minHeight: '150px'
     }
 }))
 
@@ -12,7 +13,7 @@ const ListingItem = ({ listing }) => {
     const classes = useStyles();
 
     return (
-        <Grid item xs={12} >
+        <Grid item xs={12} md={6} lg={3} >
             <Card className={classes.root}>
                 <CardContent>
                     <Grid container justify='space-between'>
@@ -29,7 +30,6 @@ const ListingItem = ({ listing }) => {
                             <Typography variant="body2" color="textSecondary" component="p">
                                 {location}
                             </Typography>
-
                         </Grid>
                         <Grid item>
                             <Typography variant="subtitle1">
