@@ -4,8 +4,9 @@ import SignUp from './components/SignUp';
 import { CssBaseline } from '@material-ui/core';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
-import ProductsList from './components/ProductsList';
-import UsersProducts from './components/UsersProducts';
+import Listings from './components/Listings';
+import User from './components/User';
+import PriceList from './components/PriceList';
 
 function App() {
   return (
@@ -19,11 +20,14 @@ function App() {
         <NavBar />
         <SignUp />
       </Route>
-      <Route exact path='/products'>
-        <ProductsList />
+      <Route exact path='/listings'>
+        <Listings />
       </Route>
       <Route exact path='/users/:id'>
-        <UsersProducts />
+        <User />
+      </Route>
+      <Route exact path='/prices'>
+        <PriceList />
       </Route>
     </Fragment>
   );

@@ -7,8 +7,8 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const Product = ({ product }) => {
-    const { id, user_id, username, location, item, description, price } = product;
+const ListingItem = ({ listing }) => {
+    const { id, user_id, username, location, item, description, price } = listing;
     const classes = useStyles();
 
     return (
@@ -43,4 +43,4 @@ const Product = ({ product }) => {
     )
 }
 
-export default Product
+export default ListingItem

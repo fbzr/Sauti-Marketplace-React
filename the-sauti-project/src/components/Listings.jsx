@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios';
-import Product from './Product';
+import ListingItem from './ListingItem';
 import { Grid, Container } from '@material-ui/core';
 
-const ProductsList = () => {
-    const [productsList, setProductsList] = useState([]);
-    const [listSearch, setListSearch] = useState([]);
+const Listings = () => {
+    const [listings, setListings] = useState([]);
+    const [listingsSearch, setListingsSearch] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             const res = await Axios.get('http://africanmarketplace.ddns.net:5000/api/listings');
-            setProductsList(res.data);
-            setListSearch(res.data);        
+            setListings(res.data);
+            setListingsSearch(res.data);        
         }
 
         fetchData();
@@ -20,12 +20,12 @@ const ProductsList = () => {
     return (
         <Container>
             <Grid justify='center' container>
-                { listSearch.map(item => (
-                    <Product key={item.id} product={item} />
+                { listingsSearch.map(item => (
+                    <ListingItem key={item.id} listing={item} />
                 )) }
             </Grid>
         </Container>
     )
 }
 
-export default ProductsList
+export default Listings
