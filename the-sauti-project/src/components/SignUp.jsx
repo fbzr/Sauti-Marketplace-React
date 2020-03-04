@@ -135,8 +135,6 @@ const SignUp = withFormik({
                     .then(res => {
                         const { token, user_id } = res.data;
                         console.log(`Token: ${token}\nUser ID: ${user_id}`);
-
-
                         //TODO redirect to homepage
                     })
                     .catch(err => console.log(err))

@@ -37,20 +37,20 @@ class App extends React.Component {
             </div>
         </div>
     );
-                  }
 }
 
 
 
-                function mapState(state) {
-                  const { alert } = state;
-                  return { alert };
-              }
-              
-              const actionCreators = {
-                  clearAlerts: alertMessage.clear
-              };
-              
-              const connectedApp = connect(mapState, actionCreators)(App);
-              export { connectedApp as App };
+
+function mapState(state) {
+  const { alert } = state;
+  return { alert };
+}
+
+const actionCreators = {
+  clearAlerts: alertMessage.clear
+};
+
+const connectedApp = connect(mapState, actionCreators)(App);
+export { connectedApp as App };
   
