@@ -13,7 +13,6 @@ const Navbar = () => {
                     </Typography>
                 </Toolbar>
             </AppBar>
-
             <Tabs value={pathName} indicatorColor='primary' textColor='primary' centered>
             <Tab label="Login" component={Link} value="/login" to='/login' />
         <Tab label="Sign Up" component={Link} value="/signup" to='/signup' />
