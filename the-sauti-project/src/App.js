@@ -1,22 +1,35 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Route } from 'react-router-dom';
 import SignUp from './components/SignUp';
 import { CssBaseline } from '@material-ui/core';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
+import Listings from './components/Listings';
+import User from './components/User';
+import PriceList from './components/PriceList';
 
 function App() {
+  const [user, setUser] = useState();
+
   return (
     <Fragment>
       <CssBaseline />
-     <NavBar />
+      <NavBar />
       <Route exact path='/login'>
-       <Login />
+        <Login setUser={setUser} />
       </Route>
       <Route exact path='/signup'>
         <SignUp />
       </Route>
-     
+      <Route exact path='/listings'>
+        <Listings />
+      </Route>
+      <Route exact path='/users'>
+        <User />
+      </Route>
+      <Route exact path='/prices'>
+        <PriceList />
+      </Route>
     </Fragment>
   );
 }
