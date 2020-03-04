@@ -1,37 +1,56 @@
-import React, { Fragment, useState } from 'react';
-import { Route } from 'react-router-dom';
-import SignUp from './components/SignUp';
-import { CssBaseline } from '@material-ui/core';
-import Login from './components/Login';
-import NavBar from './components/NavBar';
-import Listings from './components/Listings';
-import User from './components/User';
-import PriceList from './components/PriceList';
+import React from "react";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { historyUtils} from "./utils";
+import { alertMessage } from "./actions";
+import { PrivateRoute } from "./components/PrivateRoute";
+import { HomePage } from "./HomePage";
+import { LoginPage } from "./LoginPage";
 
-function App() {
-  const [user, setUser] = useState();
 
-  return (
-    <Fragment>
-      <CssBaseline />
-      <NavBar />
-      <Route exact path='/login'>
-        <Login setUser={setUser} />
-      </Route>
-      <Route exact path='/signup'>
-        <SignUp />
-      </Route>
-      <Route exact path='/listings'>
-        <Listings />
-      </Route>
-      <Route exact path='/users'>
-        <User />
-      </Route>
-      <Route exact path='/prices'>
-        <PriceList />
-      </Route>
-    </Fragment>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    
+    historyUtils.listen((location, action) => {
+      this.props.clearAlerts()
+    })
+  }
+  render() {
+
+    const { alert } = this.props;
+    return (
+        <div className="jumbotron">
+            <div className="container">
+                <div className="col-sm-8 col-sm-offset-2">
+                    {alert.message &&
+                        <div className={`alert ${alert.type}`}>{alert.message}</div>
+                    }
+                    <Router history={historyUtils}>
+                        <Switch>
+                            <PrivateRoute exact path="/" component={HomePage} />
+                            <Route path="/login" component={LoginPage} />
+                            <Redirect from="*" to="/" />
+                        </Switch>
+                    </Router>
+                </div>
+            </div>
+        </div>
+    );
 }
 
-export default App;
+
+
+
+function mapState(state) {
+  const { alert } = state;
+  return { alert };
+}
+
+const actionCreators = {
+  clearAlerts: alertMessage.clear
+};
+
+const connectedApp = connect(mapState, actionCreators)(App);
+export { connectedApp as App };
+  
