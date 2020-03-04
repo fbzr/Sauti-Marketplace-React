@@ -4,21 +4,23 @@ import Product from './Product';
 import { Grid, Container } from '@material-ui/core';
 
 const ProductsList = () => {
-    const [itemsList, setItemsList] = useState([]);
+    const [productsList, setProductsList] = useState([]);
+    const [listSearch, setListSearch] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             const res = await Axios.get('http://africanmarketplace.ddns.net:5000/api/listings');
-            setItemsList(res.data);
-            console.log(res.data);
+            setProductsList(res.data);
+            setListSearch(res.data);        
         }
 
         fetchData();
     }, [])
+    
     return (
         <Container>
             <Grid justify='center' container>
-                { itemsList.map(item => (
+                { listSearch.map(item => (
                     <Product key={item.id} product={item} />
                 )) }
             </Grid>
