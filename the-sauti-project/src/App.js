@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Route } from 'react-router-dom';
 import SignUp from './components/SignUp';
 import { CssBaseline } from '@material-ui/core';
@@ -9,15 +9,16 @@ import User from './components/User';
 import PriceList from './components/PriceList';
 
 function App() {
+  const [user, setUser] = useState();
+
   return (
     <Fragment>
       <CssBaseline />
-      <Route exact path={['/','/login']}>
-        <NavBar />
-        <Login />
+      <NavBar />
+      <Route exact path='/login'>
+        <Login setUser={setUser} />
       </Route>
       <Route exact path='/signup'>
-        <NavBar />
         <SignUp />
       </Route>
       <Route exact path='/listings'>
