@@ -18,18 +18,12 @@ const Navbar = () => {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            { !token ?
-                <Tabs value={pathName} indicatorColor='primary' textColor='primary' centered>
-                    <Tab label="Login" component={Link} value="/login" to='/login' />
-                    <Tab label="Sign Up" component={Link} value="/signup" to='/signup' />
-                </Tabs>
-                : 
-                <Tabs value={pathName} indicatorColor='primary' textColor='primary' centered>
-                    <Tab label="Prices" component={Link} value="/prices" to='/prices' />
-                    <Tab label="All listings" component={Link} value="/listings" to='/listings' />
-                    <Tab label="User Listings" component={Link} value="/users" to="/users" />
-                </Tabs>
-            }
+            <Tabs value={pathName} indicatorColor='primary' textColor='primary' centered>
+            <Tab label="Login" component={Link} value="/login" to='/login' />
+            <Tab label="Sign Up" component={Link} value="/signup" to='/signup' />
+                
+            </Tabs>
+
         </Fragment>
     )
 }

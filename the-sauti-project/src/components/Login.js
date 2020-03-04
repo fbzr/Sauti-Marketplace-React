@@ -25,6 +25,9 @@ const styles = () => ({
   }
 });
 
+
+
+
 const Login = props => {
   const {
     classes,
@@ -48,14 +51,14 @@ const Login = props => {
 
           <CardContent>
             <TextField
-              id="email"
-              label="Email"
-              type="email"
-              value={values.email}
+              id="username"
+              label="username"
+              type="text"
+              value={values.username}
               onChange={handleChange}
               onBlur={handleBlur}
-              helperText={touched.email ? errors.email : ""}
-              error={touched.email && Boolean(errors.email)}
+              helperText={touched.username ? errors.username : ""}
+              error={touched.username && Boolean(errors.username)}
               style={{color: "#870000"}}
 
               margin="dense"
@@ -97,19 +100,19 @@ const Login = props => {
 
 const Form = withFormik({
   mapPropsToValues: ({
-    email,
+    username,
     password
   }) => {
     return {
-      email: email || "",
+      username: username || "",
       password: password || ""
     };
   },
 
   validationSchema: Yup.object().shape({
-    email: Yup.string()
-      .email("Enter a valid email")
-      .required("Email is required"),
+    username: Yup.string()
+      .email("Enter your username")
+      .required("UserName is required"),
     password: Yup.string()
       .min(8, "Password must contain at least 8 characters")
       .required("Enter your password")
