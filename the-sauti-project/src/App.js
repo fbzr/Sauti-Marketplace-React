@@ -24,7 +24,7 @@ function App() {
       <Route exact path='/listings'>
         <Listings />
       </Route>
-      <Route exact path='/users/:id'>
+      <Route exact path='/users'>
         <User />
       </Route>
       <Route exact path='/prices'>
