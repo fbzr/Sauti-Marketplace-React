@@ -19,7 +19,7 @@ class App extends React.Component {
   }
   render() {
 
-    const { alert } = this.props;
+    const { alert } = this.props;yarn
     return (
         <div className="jumbotron">
             <div className="container">
