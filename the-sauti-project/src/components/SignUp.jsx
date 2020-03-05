@@ -7,9 +7,7 @@ import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({ 
     root: {
-        height: 'calc(100% - 112px)',
         width: '100%',
-        backgroundColor: theme.palette.secondary.light,
         margin: 0,  
         padding: 0,
         display: 'flex',
@@ -17,7 +15,6 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         width: '100%',
-        marginTop: '50px',
         padding: theme.spacing(2)
     },
     fieldsContainer: {

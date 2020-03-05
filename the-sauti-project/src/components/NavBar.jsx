@@ -5,6 +5,10 @@ import { Link, useLocation } from 'react-router-dom';
 const useStyles = makeStyles(theme => ({
     appbar: {
         backgroundColor: theme.palette.secondary.main
+    },
+    tab: {
+        backgroundColor: '#fff',
+        marginBottom: '20px'
     }
 }))
 
@@ -32,13 +36,13 @@ const Navbar = () => {
                 </Container>
             </AppBar>
             { sessionStorage.getItem('token') ?
-                <Tabs value={pathName} indicatorColor='primary' textColor='primary' centered>
+                <Tabs className={classes.tab} value={pathName} indicatorColor='primary' textColor='primary' centered>
                     <Tab label="Home" component={Link} value="/" to='/' />
                     <Tab label="Prices" component={Link} value="/prices" to='/prices' />
                     <Tab label="Listings" component={Link} value="/listings" to='/listings' />
                 </Tabs>
                 : 
-                <Tabs value={pathName} indicatorColor='primary' textColor='primary' centered>
+                <Tabs className={classes.tab} value={pathName} indicatorColor='primary' textColor='primary' centered>
                     <Tab label="Login" component={Link} value="/login" to='/login' />
                     <Tab label="Sign Up" component={Link} value="/signup" to='/signup' />
                 </Tabs>
