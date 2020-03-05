@@ -40,11 +40,11 @@ class App extends React.Component {
             </div>
         </div>
     );
-                  }
 }
 
 
 
+<<<<<<< HEAD
                 function mapState(state) {
                   const { alert } = state;
                   return { alert };
@@ -56,4 +56,18 @@ class App extends React.Component {
               
               const connectedApp = connect(mapState, actionCreators)(App);
               export { connectedApp as App };
+=======
+
+function mapState(state) {
+  const { alert } = state;
+  return { alert };
+}
+
+const actionCreators = {
+  clearAlerts: alertMessage.clear
+};
+
+const connectedApp = connect(mapState, actionCreators)(App);
+export { connectedApp as App };
+>>>>>>> fdd9b914ef3096ef29ca723333552c41e880d8c7
   
