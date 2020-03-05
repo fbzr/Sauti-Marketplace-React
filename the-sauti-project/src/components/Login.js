@@ -104,11 +104,10 @@ const LoginForm = (props) => {
 
 const Login = withFormik({
     // Initialize "formik states"
-    mapPropsToValues: ({setToken}) => ({
+    mapPropsToValues: () => ({
         username: '',
         password: '',
-        showPassword: false,
-        setToken: setToken
+        showPassword: false
     }),
     // Create yup validation schema
     validationSchema: yup.object().shape({
@@ -119,7 +118,7 @@ const Login = withFormik({
             .min(8, 'Password must have at least 8 characters')
             .required('Password required')
     }),
-    handleSubmit: (data, { resetForm, setSubmitting }) => {
+    handleSubmit: (data, { resetForm, setSubmitting, props }) => {
         const { username, password, setToken } = data;
         debugger
         // Log in 
@@ -129,15 +128,13 @@ const Login = withFormik({
                 const { token, user_id } = res.data;
                 console.log(`Token: ${token}\nUser ID: ${user_id}`);
                 
-                setToken(token);
+                // setToken(token);
                 console.log('its here');
+                resetForm();
+                setSubmitting(false);
+                props.handleToken(token);
             })
             .catch(err => console.log(err))
-            .finally(() => {
-              resetForm();
-              setSubmitting(false);
-              // redirect
-            })
     }
 })(LoginForm)
 

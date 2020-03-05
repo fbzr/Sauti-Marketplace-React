@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch, useHistory } from 'react-router-dom';
 import SignUp from './components/SignUp';
 import { CssBaseline } from '@material-ui/core';
 import Login from './components/Login';
@@ -24,6 +24,12 @@ const useStateWithSessionStorage = sessionStorageKey => {
 
 function App() {
   const [token, setToken] = useStateWithSessionStorage('token');
+  const history = useHistory();
+
+  const handleToken = token => {
+    setToken(token);
+    history.push('/');
+  }
 
   return (
     <Fragment>
@@ -31,10 +37,10 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path='/login'>
-          <Login setToken={setToken} />
+          <Login handleToken={handleToken} />
         </Route>
         <Route exact path='/signup'>
-          <SignUp setToken={setToken} />
+          <SignUp handleToken={handleToken} />
         </Route>
         <ProtectedRoute exact path='/' component={Homepage} />
         <ProtectedRoute exact path='/listings' component={Listings} />
