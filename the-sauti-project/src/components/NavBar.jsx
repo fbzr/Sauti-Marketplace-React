@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { AppBar, Toolbar, Typography, Tabs, Tab, makeStyles, Container } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Tabs, Tab, makeStyles, Container, IconButton } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
@@ -9,6 +9,10 @@ const useStyles = makeStyles(theme => ({
     tab: {
         backgroundColor: '#fff',
         marginBottom: '20px'
+    },
+    MuiIconButtonRoot: {
+        width: '150px',
+        backgroundColor: theme.palette.background.default
     }
 }))
 
@@ -29,9 +33,9 @@ const Navbar = () => {
             <AppBar className={classes.appbar} position="static">
                 <Container>
                     <Toolbar>
-                        <Typography variant="h6">
-                            Sauti Marketplace
-                        </Typography>
+                        <IconButton>
+                            <img className={classes.MuiIconButtonRoot} src="../../sauti.png" alt="Small logo"/>
+                        </IconButton>
                     </Toolbar>
                 </Container>
             </AppBar>
