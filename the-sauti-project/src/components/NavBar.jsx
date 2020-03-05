@@ -1,8 +1,16 @@
 import React, { Fragment } from 'react';
-import { AppBar, Toolbar, Typography, Tabs, Tab } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Tabs, Tab, makeStyles, Container } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
 
+const useStyles = makeStyles(theme => ({
+    appbar: {
+        backgroundColor: theme.palette.secondary.main
+    }
+}))
+
 const Navbar = () => {
+    const classes = useStyles();
+
     let pathName = useLocation().pathname;
     
     if(!sessionStorage.getItem('token')) {
@@ -14,12 +22,14 @@ const Navbar = () => {
 
     return (
         <Fragment>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="h6">
-                        African Marketplace
-                    </Typography>
-                </Toolbar>
+            <AppBar className={classes.appbar} position="static">
+                <Container>
+                    <Toolbar>
+                        <Typography variant="h6">
+                            African Marketplace
+                        </Typography>
+                    </Toolbar>
+                </Container>
             </AppBar>
             { sessionStorage.getItem('token') ?
                 <Tabs value={pathName} indicatorColor='primary' textColor='primary' centered>

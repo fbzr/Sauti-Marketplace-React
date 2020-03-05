@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         height: 'calc(100% - 112px)',
         width: '100%',
-        backgroundColor: colors.grey[100],
+        backgroundColor: theme.palette.secondary.light,
         margin: 0,
         padding: 0,
         display: 'flex',

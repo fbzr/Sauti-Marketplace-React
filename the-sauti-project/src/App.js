@@ -8,6 +8,8 @@ import Listings from './components/Listings';
 import PriceList from './components/PriceList';
 import Homepage from './components/Homepage';
 import ProtectedRoute from './components/ProtectedRoute';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './muiTheme';
 
 const useStateWithSessionStorage = sessionStorageKey => {
   // initialize token with its value from session storage (if it exists)
@@ -35,22 +37,24 @@ function App() {
   }
 
   return (
-    <Fragment>
-      <CssBaseline />
-      <NavBar />
-      <Switch>
-        <Route exact path='/login'>
-          <Login handleLogin={handleLogin} />
-        </Route>
-        <Route exact path='/signup'>
-          <SignUp handleLogin={handleLogin} />
-        </Route>
-        <ProtectedRoute exact path='/' component={Homepage} />
-        <ProtectedRoute exact path='/listings' component={Listings} />
-        <ProtectedRoute exact path='/prices' component={PriceList} />        
-        <Redirect from='*' to='/' />
-      </Switch>
-    </Fragment>
+    <ThemeProvider theme={theme}>
+      <Fragment>
+        <CssBaseline />
+        <NavBar />
+        <Switch>
+          <Route exact path='/login'>
+            <Login handleLogin={handleLogin} />
+          </Route>
+          <Route exact path='/signup'>
+            <SignUp handleLogin={handleLogin} />
+          </Route>
+          <ProtectedRoute exact path='/' component={Homepage} />
+          <ProtectedRoute exact path='/listings' component={Listings} />
+          <ProtectedRoute exact path='/prices' component={PriceList} />        
+          <Redirect from='*' to='/' />
+        </Switch>
+      </Fragment>
+    </ThemeProvider>
   );
 }
 

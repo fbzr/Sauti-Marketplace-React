@@ -5,12 +5,12 @@ import { TextField, Button, Grid, makeStyles, Paper, Typography, colors, InputAd
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import axios from 'axios';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({ 
     root: {
         height: 'calc(100% - 112px)',
         width: '100%',
-        backgroundColor: colors.grey[100],
-        margin: 0,
+        backgroundColor: theme.palette.secondary.light,
+        margin: 0,  
         padding: 0,
         display: 'flex',
         justifyContent: 'center'
