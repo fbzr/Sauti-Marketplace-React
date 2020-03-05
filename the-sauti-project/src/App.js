@@ -14,7 +14,7 @@ function App() {
     <Fragment>
       <CssBaseline />
       <NavBar />
-      <Route exact path='/login'>
+      <Route exact path={['/login', '/']}>
         <Login setUser={setUser} />
       </Route>
       <Route exact path='/signup'>

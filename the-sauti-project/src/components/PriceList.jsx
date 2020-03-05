@@ -6,6 +6,7 @@ import { Container } from '@material-ui/core';
 const PriceList = () => {
     // TODO token
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpZCI6OSwiaWF0IjoxNTgzMzQ5MjAyLCJleHAiOjE1ODM0MzU2MDJ9.AIa9vshllTsHHXFmJ8E_yp65tsQ3fCcUtbG9BroPGnM';
+    const config = { headers: { 'Authorization':token } }
 
     const [prices, setPrices] = useState([]);
     const [table, setTable] = useState({
@@ -20,7 +21,6 @@ const PriceList = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const config = { headers: { 'Authorization':token } }
             try {
                 const res = await Axios.get('http://africanmarketplace.ddns.net:5000/api/prices', config);
                 setPrices(res.data);
@@ -29,7 +29,7 @@ const PriceList = () => {
             }   
         }
         fetchData();
-    }, []);
+    }, [config]);
 
     useEffect(() => {
         setTable(table => ({
@@ -38,18 +38,43 @@ const PriceList = () => {
         }));
     }, [prices]);
 
-    const addPrice = newData => {
+    const addPrice = async newData => {
+        // try {
+        //     const res = await Axios.post('http://africanmarketplace.ddns.net:5000/api/prices', newData, config);
+        //     if (res.statusText === 'Created') {
+        //         setPrices(prevPrices => [...prevPrices, {...newData, id: res.data.id}]);
+        //     }
+        // } catch(err) {
+        //     console.log(err.message);
+        // }
+
         setPrices(prevPrices => [...prevPrices, newData]);
     }
 
-    const removePrice = oldData => {
+    const removePrice = async oldData => {
         setPrices(prevPrices => {
             const data = [...prevPrices];
             return data.splice(data.indexOf(oldData));
         })
+        // try {
+        //     const res = await Axios.delete(`http://africanmarketplace.ddns.net:5000/api/prices/${oldData.id}`, {
+        //         headers: {
+        //             'Authorization': token
+        //         },
+        //         data: oldData
+        //     });
+        //     console.log(res);
+        // } catch(err) {
+        //     console.log(err.message);
+        // } finally {
+        //     setPrices(prevPrices => {
+        //         const data = [...prevPrices];
+        //         return data.splice(data.indexOf(oldData));
+        //     })
+        // }
     }
 
-    const updatePrice = (oldData, newData) => {
+    const editPrice = (oldData, newData) => {
         setPrices(prevPrices => {
             const data = [...prevPrices];
             data[data.indexOf(oldData)] = newData;
@@ -78,7 +103,7 @@ const PriceList = () => {
                     setTimeout(() => {
                         resolve();
                         if (oldData) {
-                            updatePrice(oldData, newData);
+                            editPrice(oldData, newData);
                         }
                     }, 600);
                 }),
