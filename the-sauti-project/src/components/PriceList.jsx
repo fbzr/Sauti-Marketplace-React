@@ -71,7 +71,22 @@ const PriceList = () => {
         }
     }
 
-    const editPrice = (oldData, newData) => {
+    const editPrice = async (oldData, newData) => {
+        // const config = { headers: { 'Authorization':token } }
+        // try {
+        //     const res = await Axios.put(`http://africanmarketplace.ddns.net:5000/api/prices/${oldData.id}`, newData, config);
+        //     console.log(res);
+        // } catch(err) {
+        //     console.log(err.message);
+        // } finally {
+        //     setPrices(prevPrices => {
+        //         const data = [...prevPrices];
+        //         data[data.indexOf(oldData)] = newData;
+        //         console.log(data);
+        //         return data;
+        //     })
+        // }     
+        
         setPrices(prevPrices => {
             const data = [...prevPrices];
             data[data.indexOf(oldData)] = newData;
@@ -108,11 +123,6 @@ const PriceList = () => {
                 new Promise(resolve => {
                     setTimeout(() => {
                         resolve();
-                        // setPrices(prevPrices => {
-                        //     const data = [...prevPrices];
-                        //     data.splice(data.indexOf(oldData), 1);
-                        //     return { ...prevPrices, data };
-                        // });
                         removePrice(oldData);
                     }, 600);
                 }),
