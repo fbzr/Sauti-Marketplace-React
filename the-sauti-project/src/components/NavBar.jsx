@@ -5,9 +5,12 @@ import { Link, useLocation } from 'react-router-dom';
 const Navbar = () => {
     let pathName = useLocation().pathname;
     
-    if(!['/', '/login', '/signup', '/listings', '/prices'].includes(pathName)) {
-        pathName = '/login';
+    if(!sessionStorage.getItem('token')) {
+        if(!['/login', '/signup'].includes(pathName)) {
+            pathName = '/login';
+        }    
     }
+    
 
     return (
         <Fragment>
