@@ -1,21 +1,18 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
-    const token = sessionStorage.getItem('token');
-    return (
-        <Route
-        {...rest}
-        render={props => (
-            token !== '' ?
-                <Component {...props} />
-                :
-                <Redirect to={{
-                    pathname: '/login',
-                    state: { from: props.location }
-                }} />
-        )} />
-    )
-}
+const ProtectedRoute = ({ component: Component, ...rest }) => (
+    <Route
+    {...rest}
+    render={props => (
+        sessionStorage.getItem('token') ?
+            <Component {...props} />
+            :
+            <Redirect to={{
+                pathname: '/login',
+                state: { from: props.location }
+            }} />
+    )} />
+)
 
 export default ProtectedRoute

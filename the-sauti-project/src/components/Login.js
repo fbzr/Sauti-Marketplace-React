@@ -52,6 +52,11 @@ const MuiFormikTextField = ({ label, ...props }) => {
 }
 
 const LoginForm = (props) => {
+    const history = useHistory();
+    if(sessionStorage.getItem('token')) {
+        history.push('/');
+    }
+
     const { isSubmitting, values, setValues } = props;
     const classes = useStyles();
     
@@ -116,7 +121,7 @@ const Login = withFormik({
     }),
     handleSubmit: (data, { resetForm, setSubmitting }) => {
         const { username, password, setToken } = data;
-        
+        debugger
         // Log in 
         axios.post('http://africanmarketplace.ddns.net:5000/api/auth/login', { username, password })
             .then(res => {

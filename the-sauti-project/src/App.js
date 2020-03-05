@@ -39,7 +39,7 @@ function App() {
         <ProtectedRoute exact path='/' component={Homepage} />
         <ProtectedRoute exact path='/listings' component={Listings} />
         <ProtectedRoute exact path='/prices' component={PriceList} />        
-        {/* <Redirect to='/' /> */}
+        <Redirect from='*' to='/' />
       </Switch>
     </Fragment>
   );
