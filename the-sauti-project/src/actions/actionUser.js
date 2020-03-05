@@ -3,18 +3,18 @@ import { userMessages } from "../messages";
 import { crud_handling } from "../CRUD_services";
 
 
-import { alertInfo } from "./alertMessage";
-import { historyUtils } from "../utils";
+import { alertInfo } from "./alertInfo";
+import { history } from "../utils";
 
 
 
-export  const actionUser = {
+export const actionUser = {
     login, 
     logout,
     register,
     getAll,
     delete: _delete
-};
+} 
 
 function login(username, password) {
     return dispatch => {
@@ -24,7 +24,7 @@ function login(username, password) {
         .then(
             user => {
                 dispatch(success(user));
-                historyUtils.push('/')
+                history.push('/')
             },
             error => {
                 dispatch(failure(error.toString()))
@@ -35,7 +35,7 @@ function login(username, password) {
     function request(user) { return {type: userMessages.LOGIN_REQUEST, user } }
     function success(user) { return {type: userMessages.LOGIN_SUCCESS, user } }
     function failure(error){ return {type: userMessages.LOGIN_FAILURE, error} }
-}
+} 
 
 function logout() {
 
@@ -51,7 +51,7 @@ function register(user) {
         .then(
             user => {
                 dispatch(success());
-                historyUtils.push('/login');
+                history.push('/login');
                 dispatch(alertInfo.success("Registration successful"))
             },
             error => {
@@ -59,7 +59,7 @@ function register(user) {
                 dispatch(alertInfo.error(error.toString()))
             }
         );
-    };
+    }
 
     function request(user) {return { type: userMessages.REGISTER_REQUEST, user} }
     function success(user) {return { type: userMessages.REGISTER_SUCCESS, user} }
@@ -96,5 +96,5 @@ function _delete(id) {
 
     function request(id) { return { type: userMessages.DELETE_REQUEST, id } }
     function success(id) { return { type: userMessages.DELETE_SUCCESS, id } }
-    function failure(id, error) { return { type: userMessages.DELETE_FAILURE, id, error } }
+    function failure( id, error) { return { type: userMessages.DELETE_FAILURE, id, error } }
 }

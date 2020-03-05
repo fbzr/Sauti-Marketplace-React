@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-route-dom";
-import { connect } from "react-redux";
-
 import { actionUser } from "../actions";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";;
+
+
+
 
 class LoginPage extends React.Component{
     constructor(props){
@@ -35,6 +37,8 @@ class LoginPage extends React.Component{
         }
     }
 
+    
+
     render(){
         const { loggingIn } = this.props;
         const { username, password, submitted } = this.state;
@@ -58,9 +62,7 @@ class LoginPage extends React.Component{
                 </div>
                 <div>
                     <button>Login</button>
-                    {loggingIn && 
-                    <img src="" />
-                    }
+                    {loggingIn}
                     <Link to="/register">Register</Link>
                 </div>
 

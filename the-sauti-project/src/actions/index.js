@@ -1,2 +1,2 @@
-export * from "alertMessage";
-export * from "actionUser";
+export * from './alertInfo';
+export * from './actionUser';

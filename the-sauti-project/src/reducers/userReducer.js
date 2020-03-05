@@ -8,24 +8,24 @@ export function users(state = {}, action) {
             };
             case userMessages.GETALL_SUCCESS:
                 return{
-                    items: action.user
+                    username: action.user
                 };
                 case userMessages.DELETE_REQUEST:
                     return{
                         ...state,
-                        items: state.items.map(user => 
+                        username: state.username.map(user => 
                             user.id === action.id? { ...user, deleting: true }
                             : user
                             )
                     };
                     case userMessages.DELETE_SUCCESS:
                         return {
-                            items: state.items.filter(user => user.id !== action.id)
+                            username: state.username.filter(user => user.id !== action.id)
                         };
                         case userMessages.DELETE_FAILURE:
                             return{
                                 ...state,
-                                items: state.items.map(user => {
+                                username: state.username.map(user => {
                                     if (user.id === action.id) {
                                         const { deleting, ...userCopy } = user;
                                         return { ...userCopy, deleteError: action.error};

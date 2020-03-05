@@ -1,18 +1,19 @@
 import React from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { historyUtils} from "./utils";
-import { alertMessage } from "./actions";
+import { history } from "./utils/";
+import { alertInfo } from "./actions";
 import { PrivateRoute } from "./components/PrivateRoute";
-import { HomePage } from "./HomePage";
+import { HomePage } from "./HomePage/";
 import { LoginPage } from "./LoginPage";
+import { Register } from "./Register";
 
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     
-    historyUtils.listen((location, action) => {
+    history.listen((location, action) => {
       this.props.clearAlerts()
     })
   }
@@ -26,11 +27,13 @@ class App extends React.Component {
                     {alert.message &&
                         <div className={`alert ${alert.type}`}>{alert.message}</div>
                     }
-                    <Router history={historyUtils}>
+                    <Router history={history}>
                         <Switch>
                             <PrivateRoute exact path="/" component={HomePage} />
+
                             <Route path="/login" component={LoginPage} />
-                            <Redirect from="*" to="/" />
+                            <Route path="/register" component={Register} />}
+                            <Redirect from="*" to="/register" component={Register} />
                         </Switch>
                     </Router>
                 </div>
@@ -48,7 +51,7 @@ class App extends React.Component {
               }
               
               const actionCreators = {
-                  clearAlerts: alertMessage.clear
+                  clearAlerts: alertInfo.clear
               };
               
               const connectedApp = connect(mapState, actionCreators)(App);

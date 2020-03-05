@@ -1,3 +1,3 @@
-import { createBrowerHistory } from "history";
+import { createBrowserHistory } from "history";
 
-export const history = createBrowerHistory()
+export const history = createBrowserHistory()
