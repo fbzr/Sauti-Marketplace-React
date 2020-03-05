@@ -128,8 +128,6 @@ const Login = withFormik({
                 const { token, user_id } = res.data;
                 console.log(`Token: ${token}\nUser ID: ${user_id}`);
                 
-                // setToken(token);
-                console.log('its here');
                 resetForm();
                 setSubmitting(false);
                 props.handleToken(token);
