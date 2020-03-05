@@ -28,7 +28,7 @@ const styles = () => ({
 
 
 
-const Login = props => {
+const Login = e => {
   const {
     classes,
     values,
@@ -39,7 +39,7 @@ const Login = props => {
     handleBlur,
     handleSubmit,
     handleReset
-  } = props;
+  } = e;
 
   return (
     <div className={classes.container}>
