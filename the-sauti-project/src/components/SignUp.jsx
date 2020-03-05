@@ -104,11 +104,12 @@ const SignUpForm = (props) => {
 
 const SignUp = withFormik({
     // Initialize "formik states"
-    mapPropsToValues: () => ({
+    mapPropsToValues: ({setToken}) => ({
         username: '',
         password: '',
         password2: '',
-        showPassword: false
+        showPassword: false,
+        setToken: setToken
     }),
     // Create yup validation schema
     validationSchema: yup.object().shape({
@@ -123,7 +124,8 @@ const SignUp = withFormik({
             .required('Password confirmation required')
     }),
     handleSubmit: (data, { resetForm, setSubmitting }) => {
-        const { username, password } = data;
+        const { username, password, setToken } = data;
+        
         // Register
         axios.post('http://africanmarketplace.ddns.net:5000/api/auth/register', { username, password })
             .then(res => {
@@ -135,7 +137,8 @@ const SignUp = withFormik({
                     .then(res => {
                         const { token, user_id } = res.data;
                         console.log(`Token: ${token}\nUser ID: ${user_id}`);
-
+                        
+                        setToken(token);
                         //TODO redirect to homepage
                     })
                     .catch(err => console.log(err))
