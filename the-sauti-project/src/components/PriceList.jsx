@@ -51,27 +51,24 @@ const PriceList = () => {
         }
     }
 
-    const removePrice = oldData => {
-        setPrices(prevPrices => {
-            const data = [...prevPrices];
-            return data.splice(data.indexOf(oldData));
-        })
-        // try {
-        //     const res = await Axios.delete(`http://africanmarketplace.ddns.net:5000/api/prices/${oldData.id}`, {
-        //         headers: {
-        //             'Authorization': token
-        //         },
-        //         data: oldData
-        //     });
-        //     console.log(res);
-        // } catch(err) {
-        //     console.log(err.message);
-        // } finally {
-        //     setPrices(prevPrices => {
-        //         const data = [...prevPrices];
-        //         return data.splice(data.indexOf(oldData));
-        //     })
-        // }
+    const removePrice = async oldData => {
+        try {
+            const res = await Axios.delete(`http://africanmarketplace.ddns.net:5000/api/prices/${oldData.id}`, {
+                headers: {
+                    'Authorization': token
+                },
+                data: oldData
+            });
+            console.log(res);
+        } catch(err) {
+            console.log(err.message);
+        } finally {
+            setPrices(prevPrices => {
+                const index = prevPrices.findIndex(element => element.id === oldData.id);
+                prevPrices.splice(index, 1);
+                return [ ...prevPrices ];
+            })
+        }
     }
 
     const editPrice = (oldData, newData) => {
@@ -111,6 +108,11 @@ const PriceList = () => {
                 new Promise(resolve => {
                     setTimeout(() => {
                         resolve();
+                        // setPrices(prevPrices => {
+                        //     const data = [...prevPrices];
+                        //     data.splice(data.indexOf(oldData), 1);
+                        //     return { ...prevPrices, data };
+                        // });
                         removePrice(oldData);
                     }, 600);
                 }),
