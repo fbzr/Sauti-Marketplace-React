@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { TextField, Button, Grid, makeStyles, Paper, Typography, colors, InputAdornment, IconButton } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -115,7 +116,7 @@ const Login = withFormik({
     }),
     handleSubmit: (data, { resetForm, setSubmitting }) => {
         const { username, password, setToken } = data;
-
+        
         // Log in 
         axios.post('http://africanmarketplace.ddns.net:5000/api/auth/login', { username, password })
             .then(res => {
@@ -124,13 +125,13 @@ const Login = withFormik({
                 console.log(`Token: ${token}\nUser ID: ${user_id}`);
                 
                 setToken(token);
-                debugger
-                //TODO redirect to homepage
+                console.log('its here');
             })
             .catch(err => console.log(err))
             .finally(() => {
               resetForm();
               setSubmitting(false);
+              // redirect
             })
     }
 })(LoginForm)

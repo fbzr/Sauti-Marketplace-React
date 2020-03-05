@@ -1,11 +1,13 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import SignUp from './components/SignUp';
 import { CssBaseline } from '@material-ui/core';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
 import Listings from './components/Listings';
 import PriceList from './components/PriceList';
+import Homepage from './components/Homepage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const useStateWithSessionStorage = sessionStorageKey => {
   // initialize token with its value from session storage (if it exists)
@@ -22,23 +24,23 @@ const useStateWithSessionStorage = sessionStorageKey => {
 
 function App() {
   const [token, setToken] = useStateWithSessionStorage('token');
-  debugger
+
   return (
     <Fragment>
       <CssBaseline />
       <NavBar />
-      <Route exact path={['/login', '/']}>
-        <Login setToken={setToken} />
-      </Route>
-      <Route exact path='/signup'>
-        <SignUp setToken={setToken} />
-      </Route>
-      <Route exact path='/listings'>
-        <Listings />
-      </Route>
-      <Route exact path='/prices'>
-        <PriceList />
-      </Route>
+      <Switch>
+        <Route exact path='/login'>
+          <Login setToken={setToken} />
+        </Route>
+        <Route exact path='/signup'>
+          <SignUp setToken={setToken} />
+        </Route>
+        <ProtectedRoute exact path='/' component={Homepage} />
+        <ProtectedRoute exact path='/listings' component={Listings} />
+        <ProtectedRoute exact path='/prices' component={PriceList} />        
+        {/* <Redirect to='/' /> */}
+      </Switch>
     </Fragment>
   );
 }
