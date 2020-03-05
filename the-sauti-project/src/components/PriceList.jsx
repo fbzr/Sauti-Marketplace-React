@@ -6,7 +6,7 @@ import { Container } from '@material-ui/core';
 const PriceList = () => {
     // TODO token
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpZCI6OSwiaWF0IjoxNTgzMzQ5MjAyLCJleHAiOjE1ODM0MzU2MDJ9.AIa9vshllTsHHXFmJ8E_yp65tsQ3fCcUtbG9BroPGnM';
-    const config = { headers: { 'Authorization':token } }
+    
 
     const [prices, setPrices] = useState([]);
     const [table, setTable] = useState({
@@ -20,6 +20,7 @@ const PriceList = () => {
     });
 
     useEffect(() => {
+        const config = { headers: { 'Authorization':token } }
         const fetchData = async () => {
             try {
                 const res = await Axios.get('http://africanmarketplace.ddns.net:5000/api/prices', config);
@@ -29,7 +30,7 @@ const PriceList = () => {
             }   
         }
         fetchData();
-    }, [config]);
+    }, []);
 
     useEffect(() => {
         setTable(table => ({
@@ -39,19 +40,18 @@ const PriceList = () => {
     }, [prices]);
 
     const addPrice = async newData => {
-        // try {
-        //     const res = await Axios.post('http://africanmarketplace.ddns.net:5000/api/prices', newData, config);
-        //     if (res.statusText === 'Created') {
-        //         setPrices(prevPrices => [...prevPrices, {...newData, id: res.data.id}]);
-        //     }
-        // } catch(err) {
-        //     console.log(err.message);
-        // }
-
-        setPrices(prevPrices => [...prevPrices, newData]);
+        try {
+            const config = { headers: { 'Authorization':token } }
+            const res = await Axios.post('http://africanmarketplace.ddns.net:5000/api/prices', newData, config);
+            if (res.statusText === 'Created') {
+                setPrices(prevPrices => [...prevPrices, {...newData, id: res.data.id}]);
+            }
+        } catch(err) {
+            console.log(err.message);
+        }
     }
 
-    const removePrice = async oldData => {
+    const removePrice = oldData => {
         setPrices(prevPrices => {
             const data = [...prevPrices];
             return data.splice(data.indexOf(oldData));
