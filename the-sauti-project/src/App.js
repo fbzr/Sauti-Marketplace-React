@@ -32,7 +32,7 @@ class App extends React.Component {
                             <PrivateRoute exact path="/" component={HomePage} />
 
                             <Route path="/login" component={LoginPage} />
-                            <Route path="/register" component={Register} />}
+                            <Route path="/register" component={Register} />
                             <Redirect from="*" to="/register" component={Register} />
                         </Switch>
                     </Router>
@@ -42,9 +42,8 @@ class App extends React.Component {
     );
 }
 
+}
 
-
-<<<<<<< HEAD
                 function mapState(state) {
                   const { alert } = state;
                   return { alert };
@@ -56,18 +55,4 @@ class App extends React.Component {
               
               const connectedApp = connect(mapState, actionCreators)(App);
               export { connectedApp as App };
-=======
-
-function mapState(state) {
-  const { alert } = state;
-  return { alert };
-}
-
-const actionCreators = {
-  clearAlerts: alertMessage.clear
-};
-
-const connectedApp = connect(mapState, actionCreators)(App);
-export { connectedApp as App };
->>>>>>> fdd9b914ef3096ef29ca723333552c41e880d8c7
   
