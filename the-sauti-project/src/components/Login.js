@@ -1,127 +1,138 @@
-import React from "react";
-import { withFormik } from "formik";
-import * as Yup from "yup";
-import { withStyles } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
-import "./login.css";
+import React from 'react';
+import { Form, withFormik, useField } from 'formik';
+import * as yup from 'yup';
+import { TextField, Button, Grid, makeStyles, Paper, Typography, colors, InputAdornment, IconButton } from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
+import axios from 'axios';
 
+const useStyles = makeStyles(theme => ({
+    root: {
+        height: 'calc(100% - 112px)',
+        width: '100%',
+        backgroundColor: colors.grey[100],
+        margin: 0,
+        padding: 0,
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    paper: {
+        width: '100%',
+        marginTop: '50px',
+        padding: theme.spacing(2)
+    },
+    fieldsContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignContent: 'center'
+    },
+    field: {
+        margin: '5px 0'
+    },
+    '@global': {
+        'html, body, #root': {
+            height: '100%'
+        }
+    }
+  }));
 
-const styles = () => ({
-  card: {
-    maxWidth: 420,
-    marginTop: 50,
-  },
-  container: {
-    display: "Flex",
-    justifyContent: "center",
-  },
-  actions: {
-    float: "right"
-  }
-});
+// Material UI TextField with access to Formik Field's props and methods 
+const MuiFormikTextField = ({ label, ...props }) => {
+    const [field, meta] = useField(props);
+    return (
+        <TextField 
+            {...field}
+            {...props}
+            label={label}
+            error={meta.error && meta.touched}
+            helperText={ (meta.error && meta.touched) && meta.error }
+        />         
+    )
+}
 
-const Login = props => {
-  const {
-    classes,
-    values,
-    touched,
-    errors,
-    isSubmitting,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    handleReset
-  } = props;
-
-  return (
-    <div className={classes.container}>
-  
-      <form onSubmit={handleSubmit}>
-      
-        <Card className={classes.card}>
-      <h1>Login</h1>
-
-          <CardContent>
-            <TextField
-              id="email"
-              label="Email"
-              type="email"
-              value={values.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              helperText={touched.email ? errors.email : ""}
-              error={touched.email && Boolean(errors.email)}
-              style={{color: "#870000"}}
-
-              margin="dense"
-              variant="outlined"
-              fullWidth
-            />
-
-            <TextField
-              id="password"
-              label="Password"
-              type="password"
-              value={values.password}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              helperText={touched.password ? errors.password : ""}
-              error={touched.password && Boolean(errors.password)}
-              style={{color: "#870000"}}
-              margin="dense"
-              variant="outlined"
-              fullWidth
-            />
-          </CardContent>
-          <CardActions className={classes.actions}>
-            <Button type="submit" color="primary" disabled={isSubmitting}>
-              LOGIN
-            </Button>
-            <Button color="secondary" onClick={handleReset}>
-              CLEAR
-            </Button>
-            
-          </CardActions>
-          <div className="link"><Link>Create an account</Link></div>
-         
-        </Card>
-      </form>
-    </div>
-  );
-};
-
-const Form = withFormik({
-  mapPropsToValues: ({
-    email,
-    password
-  }) => {
-    return {
-      email: email || "",
-      password: password || ""
+const LoginForm = (props) => {
+    const { isSubmitting, values, setValues } = props;
+    const classes = useStyles();
+    
+    const handleClickShowPassword = () => {
+        console.log(props);
+        setValues({ ...values,  showPassword: !values.showPassword });
     };
-  },
+    
+    const handleMouseDownPassword = event => {
+        event.preventDefault();
+    };
 
-  validationSchema: Yup.object().shape({
-    email: Yup.string()
-      .email("Enter a valid email")
-      .required("Email is required"),
-    password: Yup.string()
-      .min(8, "Password must contain at least 8 characters")
-      .required("Enter your password")
-  }),
+    return (
+        <Grid container className={classes.root} >
+            <Grid item lg={3} md={4} sm={6} xs={11} p={4}>
+            <Paper elevation={3} spacing={2} className={classes.paper}>
+                <Typography variant="h3" component="h1">
+                    Sign In
+                </Typography>
+                <Form width={500} autoComplete='off' className={classes.fieldsContainer}>
+                    <MuiFormikTextField className={classes.field} type='text' label='Username' name='username' id='username' />
+                    <MuiFormikTextField 
+                        className={classes.field}
+                        name='password'
+                        id='password'
+                        type={values.showPassword ? 'text' : 'password'}
+                        label='Password' 
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword} >
+                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment> )
+                        }}     
+                    />
+                    
+                    <Button disabled={isSubmitting} variant="contained" color="primary" type='submit'>Enter</Button>
+                </Form>
+            </Paper>
+            </Grid>
+        </Grid>
+    )
+}
 
-  handleSubmit: (values, { setSubmitting }) => {
-    setTimeout(() => {
-      // submit to the server
-      alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 1000);
-  }
-})(Login);
+const Login = withFormik({
+    // Initialize "formik states"
+    mapPropsToValues: ({setToken}) => ({
+        username: '',
+        password: '',
+        showPassword: false,
+        setToken: setToken
+    }),
+    // Create yup validation schema
+    validationSchema: yup.object().shape({
+        username: yup.string()
+            .min(4, 'Username must have at least 4 characters')
+            .required('Username is required'),
+        password: yup.string()
+            .min(8, 'Password must have at least 8 characters')
+            .required('Password required')
+    }),
+    handleSubmit: (data, { resetForm, setSubmitting }) => {
+        const { username, password, setToken } = data;
 
-export default withStyles(styles)(Form);
+        // Log in 
+        axios.post('http://africanmarketplace.ddns.net:5000/api/auth/login', { username, password })
+            .then(res => {
+                setSubmitting(true);
+                const { token, user_id } = res.data;
+                console.log(`Token: ${token}\nUser ID: ${user_id}`);
+                
+                setToken(token);
+                debugger
+                //TODO redirect to homepage
+            })
+            .catch(err => console.log(err))
+            .finally(() => {
+              resetForm();
+              setSubmitting(false);
+            })
+    }
+})(LoginForm)
+
+export default Login

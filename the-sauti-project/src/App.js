@@ -28,7 +28,7 @@ function App() {
       <CssBaseline />
       <NavBar />
       <Route exact path={['/login', '/']}>
-        <Login />
+        <Login setToken={setToken} />
       </Route>
       <Route exact path='/signup'>
         <SignUp setToken={setToken} />
