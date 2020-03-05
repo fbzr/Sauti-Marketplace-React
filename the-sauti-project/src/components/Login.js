@@ -119,18 +119,17 @@ const Login = withFormik({
             .required('Password required')
     }),
     handleSubmit: (data, { resetForm, setSubmitting, props }) => {
-        const { username, password, setToken } = data;
-        debugger
+        const { username, password } = data;
+        
         // Log in 
         axios.post('http://africanmarketplace.ddns.net:5000/api/auth/login', { username, password })
             .then(res => {
                 setSubmitting(true);
                 const { token, user_id } = res.data;
-                console.log(`Token: ${token}\nUser ID: ${user_id}`);
                 
                 resetForm();
                 setSubmitting(false);
-                props.handleToken(token);
+                props.handleLogin(token, user_id);
             })
             .catch(err => console.log(err))
     }

@@ -123,8 +123,8 @@ const SignUp = withFormik({
             .oneOf([yup.ref('password'), null], 'Passwords must match')
             .required('Password confirmation required')
     }),
-    handleSubmit: (data, { resetForm, setSubmitting }) => {
-        const { username, password, setToken } = data;
+    handleSubmit: (data, { resetForm, setSubmitting, props }) => {
+        const { username, password } = data;
         
         // Register
         axios.post('http://africanmarketplace.ddns.net:5000/api/auth/register', { username, password })
@@ -136,18 +136,13 @@ const SignUp = withFormik({
                 axios.post('http://africanmarketplace.ddns.net:5000/api/auth/login', { username, password })
                     .then(res => {
                         const { token, user_id } = res.data;
-                        console.log(`Token: ${token}\nUser ID: ${user_id}`);
-                        
-                        setToken(token);
-                        //TODO redirect to homepage
+                        resetForm();
+                        setSubmitting(false);
+                        props.handleLogin(token, user_id);
                     })
                     .catch(err => console.log(err))
             })
             .catch(err => console.log(err))
-            .finally(() => {
-                resetForm();
-                setSubmitting(false);
-            })
     }
 })(SignUpForm)
 

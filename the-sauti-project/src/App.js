@@ -24,10 +24,13 @@ const useStateWithSessionStorage = sessionStorageKey => {
 
 function App() {
   const [token, setToken] = useStateWithSessionStorage('token');
+  // const [userId, setUserId] = useStateWithSessionStorage('userId');
+  // const [userId, setUserId] = useState(''); 
   const history = useHistory();
 
-  const handleToken = token => {
-    setToken(token);
+  const handleLogin = (loginToken, loginUserId) => {
+    setToken(loginToken);
+    // setUserId(loginUserId);
     history.push('/');
   }
 
@@ -37,10 +40,10 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path='/login'>
-          <Login handleToken={handleToken} />
+          <Login handleLogin={handleLogin} />
         </Route>
         <Route exact path='/signup'>
-          <SignUp handleToken={handleToken} />
+          <SignUp handleLogin={handleLogin} />
         </Route>
         <ProtectedRoute exact path='/' component={Homepage} />
         <ProtectedRoute exact path='/listings' component={Listings} />
