@@ -30,7 +30,7 @@ const Navbar = () => {
                 <Container>
                     <Toolbar>
                         <Typography variant="h6">
-                            African Marketplace
+                            Sauti Marketplace
                         </Typography>
                     </Toolbar>
                 </Container>
