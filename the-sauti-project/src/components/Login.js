@@ -115,7 +115,7 @@ const Login = withFormik({
             .min(8, 'Password must have at least 8 characters')
             .required('Password required')
     }),
-    handleSubmit: (data, { resetForm, setSubmitting, props }) => {
+    handleSubmit: (data, { resetForm, setErrors, setSubmitting, props }) => {
         const { username, password } = data;
         
         // Log in 
@@ -128,7 +128,10 @@ const Login = withFormik({
                 setSubmitting(false);
                 props.handleLogin(token, user_id);
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setSubmitting(false);
+                return setErrors({password: 'Password doesn\'t match'})
+            })
     }
 })(LoginForm)
 
