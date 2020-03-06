@@ -88,7 +88,7 @@ const SignUpForm = (props) => {
                         className={classes.field}
                         name='password2'
                         id='password2'
-                        type={values.showPassword ? 'text' : 'password'}
+                        type='password'
                         label='Password Confirmation'   
                     />
                     <Button disabled={isSubmitting} variant="contained" color="primary" type='submit'>Submit</Button>
