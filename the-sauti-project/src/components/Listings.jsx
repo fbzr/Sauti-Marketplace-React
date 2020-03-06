@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   }));
 
 
-const Listings = (props) => {
+const Listings = ({userId}) => {
     const classes = useStyles();
     const [listings, setListings] = useState([]);
     const [filteredListings, setFilteredListings] = useState([]);
@@ -99,7 +99,7 @@ const Listings = (props) => {
             </Grid>
             <Grid justify='flex-start' container>
                 { filteredListings.map(item => (
-                    <ListingItem key={item.id} listing={item} />
+                    <ListingItem userId={userId} key={item.id} listing={item} />
                 )) }
             </Grid>
         </Container>
