@@ -51,7 +51,7 @@ const ListingItem = ({ listing, userId }) => {
                             </Typography>
                         </Grid>
                     </Grid>
-                    { (user_id === userId) &&
+                    {/* { (user_id === userId) &&
                     (<Grid container justify='flex-end'>
                         <IconButton aria-label="Edit listing">
                             <Edit />
@@ -59,7 +59,7 @@ const ListingItem = ({ listing, userId }) => {
                         <IconButton aria-label="Edit listing">
                             <DeleteOutline />
                         </IconButton>
-                    </Grid>) }
+                    </Grid>) } */}
                 </CardContent>
             </Card>
         </Grid>
