@@ -44,7 +44,7 @@ function App() {
             <SignUp handleLogin={handleLogin} />
           </Route>
           <ProtectedRoute exact path='/' component={Homepage} />
-          <ProtectedRoute exact path='/listings' component={Listings} />
+          <ProtectedRoute userId={credentials.id} exact path='/listings' component={Listings} />
           <ProtectedRoute exact path='/prices' component={PriceList} />        
           <Redirect from='*' to='/' />
         </Switch>
