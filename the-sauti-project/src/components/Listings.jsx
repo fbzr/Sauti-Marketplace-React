@@ -17,7 +17,6 @@ const useStyles = makeStyles(theme => ({
 
 
 const Listings = (props) => {
-    console.log(props);
     const classes = useStyles();
     const [listings, setListings] = useState([]);
     const [filteredListings, setFilteredListings] = useState([]);

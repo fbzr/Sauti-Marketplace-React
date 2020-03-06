@@ -13,13 +13,14 @@ import theme from './muiTheme';
 
 function App() {
   const history = useHistory();
-  const [credentials, setCredentials] = useState({
-    token: '',
-    id: ''
+  const [credentials, setCredentials] = useState({ 
+    token: sessionStorage.getItem('token') || '',
+    id: sessionStorage.getItem('id') || '' 
   });
 
   useEffect(() => {
     sessionStorage.setItem('token', credentials.token);
+    sessionStorage.setItem('id', credentials.id);
   }, [credentials]);
 
   const handleLogin = (loginToken, loginUserId) => {
@@ -44,7 +45,7 @@ function App() {
             <SignUp handleLogin={handleLogin} />
           </Route>
           <ProtectedRoute exact path='/' component={Homepage} />
-          <ProtectedRoute userId={credentials.id} exact path='/listings' component={Listings} />
+          <ProtectedRoute exact path='/listings' component={Listings} userId={credentials.id} />
           <ProtectedRoute exact path='/prices' component={PriceList} />        
           <Redirect from='*' to='/' />
         </Switch>
