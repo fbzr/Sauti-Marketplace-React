@@ -11,28 +11,23 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './muiTheme';
 
-const useStateWithSessionStorage = sessionStorageKey => {
-  // initialize token with its value from session storage (if it exists)
-  const [value, setValue] = useState(
-    sessionStorage.getItem(sessionStorageKey) || ''
-  );
+function App() {
+  const history = useHistory();
+  const [credentials, setCredentials] = useState({
+    token: '',
+    id: ''
+  });
 
   useEffect(() => {
-    sessionStorage.setItem(sessionStorageKey, value);
-  }, [value, sessionStorageKey]);
-
-  return [value, setValue];
-}
-
-function App() {
-  const [token, setToken] = useStateWithSessionStorage('token');
-  // const [userId, setUserId] = useStateWithSessionStorage('userId');
-  // const [userId, setUserId] = useState(''); 
-  const history = useHistory();
+    sessionStorage.setItem('token', credentials.token);
+  }, [credentials]);
 
   const handleLogin = (loginToken, loginUserId) => {
-    setToken(loginToken);
-    // setUserId(loginUserId);
+    setCredentials({
+      token: loginToken,
+      id: loginUserId
+    });
+
     history.push('/');
   }
 
