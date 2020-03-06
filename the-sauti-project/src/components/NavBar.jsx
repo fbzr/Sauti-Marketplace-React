@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { AppBar, Toolbar, Typography, Tabs, Tab, makeStyles, Container, IconButton } from '@material-ui/core';
+import { AppBar, Toolbar, Tabs, Tab, makeStyles, Container, IconButton } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
