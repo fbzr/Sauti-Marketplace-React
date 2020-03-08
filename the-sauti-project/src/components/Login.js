@@ -48,89 +48,6 @@ const MuiFormikTextField = ({ label, ...props }) => {
     )
 }
 
-<<<<<<< HEAD
-
-
-
-const Login = e => {
-  const {
-    classes,
-    values,
-    touched,
-    errors,
-    isSubmitting,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    handleReset
-  } = e;
-
-  return (
-    <div className={classes.container}>
-  
-      <form onSubmit={handleSubmit}>
-      
-        <Card className={classes.card}>
-      <h1>Login</h1>
-
-          <CardContent>
-            <TextField
-              id="username"
-              label="username"
-              type="text"
-              value={values.username}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              helperText={touched.username ? errors.username : ""}
-              error={touched.username && Boolean(errors.username)}
-              style={{color: "#870000"}}
-
-              margin="dense"
-              variant="outlined"
-              fullWidth
-            />
-
-            <TextField
-              id="password"
-              label="Password"
-              type="password"
-              value={values.password}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              helperText={touched.password ? errors.password : ""}
-              error={touched.password && Boolean(errors.password)}
-              style={{color: "#870000"}}
-              margin="dense"
-              variant="outlined"
-              fullWidth
-            />
-          </CardContent>
-          <CardActions className={classes.actions}>
-            <Button type="submit" color="primary" disabled={isSubmitting}>
-              LOGIN
-            </Button>
-            <Button color="secondary" onClick={handleReset}>
-              CLEAR
-            </Button>
-            
-          </CardActions>
-          <div className="link"><Link>Create an account</Link></div>
-         
-        </Card>
-      </form>
-    </div>
-  );
-};
-
-const Form = withFormik({
-  mapPropsToValues: ({
-    username,
-    password
-  }) => {
-    return {
-      username: username || "",
-      password: password || ""
-=======
 const LoginForm = (props) => {
     const history = useHistory();
     if(sessionStorage.getItem('token')) {
@@ -147,19 +64,8 @@ const LoginForm = (props) => {
     
     const handleMouseDownPassword = event => {
         event.preventDefault();
->>>>>>> 0c3631c458dcf3c0838c644193b2c939d6769cc8
     };
 
-<<<<<<< HEAD
-  validationSchema: Yup.object().shape({
-    username: Yup.string()
-      .email("Enter your username")
-      .required("UserName is required"),
-    password: Yup.string()
-      .min(8, "Password must contain at least 8 characters")
-      .required("Enter your password")
-  }),
-=======
     return (
         <Grid container className={classes.root} >
             <Grid item lg={3} md={4} sm={6} xs={11} p={4}>
@@ -192,7 +98,6 @@ const LoginForm = (props) => {
         </Grid>
     )
 }
->>>>>>> 0c3631c458dcf3c0838c644193b2c939d6769cc8
 
 const Login = withFormik({
     // Initialize "formik states"

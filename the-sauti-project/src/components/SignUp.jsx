@@ -132,14 +132,9 @@ const SignUp = withFormik({
                 axios.post('http://africanmarketplace.ddns.net:5000/api/auth/login', { username, password })
                     .then(res => {
                         const { token, user_id } = res.data;
-<<<<<<< HEAD
-                        console.log(`Token: ${token}\nUser ID: ${user_id}`);
-                        //TODO redirect to homepage
-=======
                         resetForm();
                         setSubmitting(false);
                         props.handleLogin(token, user_id);
->>>>>>> 0c3631c458dcf3c0838c644193b2c939d6769cc8
                     })
                     .catch(err => console.log(err))
             })

@@ -33,14 +33,6 @@ const Navbar = () => {
                     </Toolbar>
                 </Container>
             </AppBar>
-<<<<<<< HEAD
-            <Tabs value={pathName} indicatorColor='primary' textColor='primary' centered>
-            <Tab label="Login" component={Link} value="/login" to='/login' />
-            <Tab label="Sign Up" component={Link} value="/signup" to='/signup' />
-                
-            </Tabs>
-
-=======
             { sessionStorage.getItem('token') ?
                 <Tabs className={classes.tab} value={protectedRoutes.includes(locationPathName) ? locationPathName : '/' } indicatorColor='primary' textColor='primary' centered>
                     <Tab label="Home" component={Link} value="/" to='/' />
@@ -53,7 +45,6 @@ const Navbar = () => {
                     <Tab label="Sign Up" component={Link} value="/signup" to='/signup' />
                 </Tabs>
             }
->>>>>>> 0c3631c458dcf3c0838c644193b2c939d6769cc8
         </Fragment>
     )
 }
