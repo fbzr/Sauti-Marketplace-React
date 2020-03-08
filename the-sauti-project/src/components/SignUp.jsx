@@ -1,23 +1,20 @@
 import React from 'react';
 import { Form, withFormik, useField } from 'formik';
 import * as yup from 'yup';
-import { TextField, Button, Grid, makeStyles, Paper, Typography, colors, InputAdornment, IconButton } from '@material-ui/core';
+import { TextField, Button, Grid, makeStyles, Paper, Typography, InputAdornment, IconButton } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import axios from 'axios';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({ 
     root: {
-        height: 'calc(100% - 112px)',
         width: '100%',
-        backgroundColor: colors.grey[100],
-        margin: 0,
+        margin: 0,  
         padding: 0,
         display: 'flex',
         justifyContent: 'center'
     },
     paper: {
         width: '100%',
-        marginTop: '50px',
         padding: theme.spacing(2)
     },
     fieldsContainer: {
@@ -91,7 +88,7 @@ const SignUpForm = (props) => {
                         className={classes.field}
                         name='password2'
                         id='password2'
-                        type={values.showPassword ? 'text' : 'password'}
+                        type='password'
                         label='Password Confirmation'   
                     />
                     <Button disabled={isSubmitting} variant="contained" color="primary" type='submit'>Submit</Button>
@@ -122,8 +119,9 @@ const SignUp = withFormik({
             .oneOf([yup.ref('password'), null], 'Passwords must match')
             .required('Password confirmation required')
     }),
-    handleSubmit: (data, { resetForm, setSubmitting }) => {
+    handleSubmit: (data, { resetForm, setSubmitting, props }) => {
         const { username, password } = data;
+        
         // Register
         axios.post('http://africanmarketplace.ddns.net:5000/api/auth/register', { username, password })
             .then(res => {
@@ -134,16 +132,18 @@ const SignUp = withFormik({
                 axios.post('http://africanmarketplace.ddns.net:5000/api/auth/login', { username, password })
                     .then(res => {
                         const { token, user_id } = res.data;
+<<<<<<< HEAD
                         console.log(`Token: ${token}\nUser ID: ${user_id}`);
                         //TODO redirect to homepage
+=======
+                        resetForm();
+                        setSubmitting(false);
+                        props.handleLogin(token, user_id);
+>>>>>>> 0c3631c458dcf3c0838c644193b2c939d6769cc8
                     })
                     .catch(err => console.log(err))
             })
             .catch(err => console.log(err))
-            .finally(() => {
-                resetForm();
-                setSubmitting(false);
-            })
     }
 })(SignUpForm)
 

@@ -1,29 +1,59 @@
-import React, { Fragment } from 'react';
-import { AppBar, Toolbar, Typography, Tabs, Tab } from '@material-ui/core';
+import React, { Fragment, useEffect, useState } from 'react';
+import { AppBar, Toolbar, Tabs, Tab, makeStyles, Container, IconButton } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
 
-const Navbar = () => {
-    // TODO change to dinamic token and userID
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpZCI6OSwiaWF0IjoxNTgzMjYxMjM4LCJleHAiOjE1ODMzNDc2Mzh9.3teldLkKlu-DW4fM4u5-lTQ_2WVtg4QbXMoA4PKmZcQ';
-    const userId = 3;
+const useStyles = makeStyles(theme => ({
+    appbar: {
+        backgroundColor: theme.palette.secondary.main
+    },
+    tab: {
+        backgroundColor: '#fff',
+        marginBottom: '20px'
+    },
+    MuiIconButtonRoot: {
+        width: '150px',
+        backgroundColor: theme.palette.background.default
+    }
+}))
 
-    const pathName = useLocation().pathname;
+const Navbar = () => {
+    const classes = useStyles();
+    const locationPathName = useLocation().pathname;
+    const protectedRoutes = ['/prices', '/listings', '/' ];
+    const nonProtectedRoutes = [ '/login', '/signup' ];
 
     return (
         <Fragment>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="h6">
-                        African Marketplace
-                    </Typography>
-                </Toolbar>
+            <AppBar className={classes.appbar} position="static">
+                <Container>
+                    <Toolbar>
+                        <IconButton>
+                            <img className={classes.MuiIconButtonRoot} src="../../sauti.png" alt="Small logo"/>
+                        </IconButton>
+                    </Toolbar>
+                </Container>
             </AppBar>
+<<<<<<< HEAD
             <Tabs value={pathName} indicatorColor='primary' textColor='primary' centered>
             <Tab label="Login" component={Link} value="/login" to='/login' />
             <Tab label="Sign Up" component={Link} value="/signup" to='/signup' />
                 
             </Tabs>
 
+=======
+            { sessionStorage.getItem('token') ?
+                <Tabs className={classes.tab} value={protectedRoutes.includes(locationPathName) ? locationPathName : '/' } indicatorColor='primary' textColor='primary' centered>
+                    <Tab label="Home" component={Link} value="/" to='/' />
+                    <Tab label="Prices" component={Link} value="/prices" to='/prices' />
+                    <Tab label="Listings" component={Link} value="/listings" to='/listings' />
+                </Tabs>
+                : 
+                <Tabs className={classes.tab} value={nonProtectedRoutes.includes(locationPathName) ? locationPathName : '/login' } indicatorColor='primary' textColor='primary' centered>
+                    <Tab label="Login" component={Link} value="/login" to='/login' />
+                    <Tab label="Sign Up" component={Link} value="/signup" to='/signup' />
+                </Tabs>
+            }
+>>>>>>> 0c3631c458dcf3c0838c644193b2c939d6769cc8
         </Fragment>
     )
 }
